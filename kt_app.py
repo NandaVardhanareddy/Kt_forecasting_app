@@ -70,7 +70,10 @@ def main():
     st.image(logo_url, caption="Institute Logo", width=100)
     st.title('Solar Calculator & Clearness Index Forecast')
     model = tf.keras.models.load_model('forecast_KT_model1.h5')
-   
+    # Custom CSS for positioning the logo at the right top corner
+    
+
+    # Render the logo at the right top corner
    
     # taking input for calculations
 
@@ -95,8 +98,8 @@ def main():
     sdf = 0.095 + 0.04*(m.sin(m.radians(360*(julian_day-100)/365)))
 
     # Radiation calculations
-    p = 1370*(1 + 0.034*m.cos(360*julian_day/365)) #Extra Terrestrial Solar Insolation
-    gd = p*m.exp((-1)*od*sdf) #Clear Sky Radiation
+    p = 1370*(1 + 0.034*m.cos(m.radians(360*julian_day/365))) #Extra Terrestrial Solar Insolation
+    gd = p*m.exp((-1)*od*a) #Clear Sky Radiation
     aoi = m.cos(m.radians(se))*m.cos(m.radians(wall_azimuth_angle)) #Angle of incidence
     br = gd*aoi #Beam Radiation
     dr = gd*sdf #Diffused Radiation
@@ -105,7 +108,7 @@ def main():
     te = tr_d*wall_area #Total Energy
 
     #for a wall
-    brw = gd*(m.cos(m.radians(surface_slope))+m.tan(m.radians(se))*m.cos(m.radians(surface_orientation)))
+    brw = gd*(m.cos(m.radians(surface_slope))+m.tan(m.radians(se))*m.cos(m.radians(surface_orientation))*m.sin(m.radians(surface_slope)))
     trw = (brw*4.814 + dr*10)*wall_area
 
     if st.button('Results'):
