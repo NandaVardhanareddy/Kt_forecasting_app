@@ -6,7 +6,7 @@ import tensorflow as tf
 import keras
 import math as m
 from decimal import Decimal, getcontext
-
+from streamlit_lottie import st_lottie
 
 def make_forecast(sequence,model1,forecast_number):
     test_forecasts = []
@@ -24,7 +24,7 @@ def make_forecast(sequence,model1,forecast_number):
         # use the prediction to update the batch and remove the first value
         current_batch = np.append(current_batch[:,1:,:],[[current_pred]],axis=1)
         
-    return test_forecasts
+    return test_forecast
 def convert_input_to_float_sequence(input_str):
     try:
         # Split the input string by commas and convert each element to float
@@ -36,10 +36,45 @@ def convert_input_to_float_sequence(input_str):
 
 def main():
 
+    
+    
+    animation_url = "https://lottie.host/2f3d4aa6-989c-4857-b3cf-1f22b1310a80/JfuYbg7693.json"  # Replace with the filename or URL of your animation JSON file
+    
+
+    logo_url = "https://upload.wikimedia.org/wikipedia/en/thumb/1/1c/IIT_Kharagpur_Logo.svg/330px-IIT_Kharagpur_Logo.svg.png"  # Replace with the filename or URL of your logo image
+    st.markdown(
+        f"""
+        <style>
+        /* Container for the Lottie animation (left top corner) */
+        .lottie_animation {{
+            position: relative;
+            top: 10px;
+            left: 10px;
+            
+        }}
+        
+        /* Container for the institute's logo (top right corner) */
+        .Institute Logo {{
+            position: absolute;
+            top: 0;
+            right: 0;
+        
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+    #st_lottie(animation_url, speed=1, width=300, height=300, key="lottie_animation")
+    st.image(logo_url, caption="Institute Logo", width=100)
     st.title('Solar Calculator & Clearness Index Forecast')
     model = tf.keras.models.load_model('D:\\KT\\forecast_KT_model1.h5')
+    # Custom CSS for positioning the logo at the right top corner
+    
 
-
+    # Render the logo at the right top corner
+   
     # taking input for calculations
 
     latitude = st.number_input('LATITUDE', step=0.01)
