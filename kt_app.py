@@ -67,7 +67,7 @@ def main():
 
 
     #st_lottie(animation_url, speed=1, width=300, height=300, key="lottie_animation")
-    st.image(logo_url, caption="Institute Logo", width=100)
+    st.image(logo_url, caption="IIT KGP", width=100)
     st.title('Solar Calculator & Clearness Index Forecast')
     model = tf.keras.models.load_model('forecast_KT_model1.h5')
     # Custom CSS for positioning the logo at the right top corner
