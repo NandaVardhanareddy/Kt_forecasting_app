@@ -24,7 +24,7 @@ def make_forecast(sequence,model1,forecast_number):
         # use the prediction to update the batch and remove the first value
         current_batch = np.append(current_batch[:,1:,:],[[current_pred]],axis=1)
         
-    return test_forecast
+    return test_forecasts
 def convert_input_to_float_sequence(input_str):
     try:
         # Split the input string by commas and convert each element to float
