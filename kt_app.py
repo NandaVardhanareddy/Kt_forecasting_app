@@ -82,8 +82,7 @@ def main():
     hours_before_solar_noon = st.number_input('Hours before solar noon', step=0.01)
     wall_azimuth_angle = st.number_input('Wall Azimuth Angle', step=0.01)
     wall_area = st.number_input('Wall Area', step=0.01)
-    surface_slope = st.number_input('surface slope',step=0.01)
-    surface_orientation = st.number_input('surafce orientation(south = 0,west = +90)',step=0.01)
+    
     # for clearness index forecasting
     st.subheader('Clearness Index Forecasting')
     st.write('Enter the past 5 days clearness index values:')
@@ -124,7 +123,8 @@ def main():
         avg_pk_hr = 4.814 ## for kgp avg Peak Sun Hours
         #for a wall
         brw = (gd/2) + ((gd/5)*m.cos(wall_azimuth_angle)) + (gd/10)*m.cos(m.radians(360*(julian_day - 172)/365))
-        trw = (brw*4.814 + dr*10)*wall_area
+        trw = (brw*4.814 + dr*10)
+        te = trw*wall_area
         
         table1_data = {
             "Variable": ["Solar Hour Angle", "Solar Declination", "Solar Elevation", "Collector Tilt Angle", "Air Mass Ratio", "Optical Depth", "Sky Diffuse Factor"],
@@ -133,8 +133,8 @@ def main():
         table1_df = pd.DataFrame(table1_data)
         # Create DataFrame for the second table
         table2_data = {
-            "Variable": ["Extra Terrestrial Solar Insolation(J/hr m^2)", "Clear Sky Radiation(J/hr m^2)","Diffused Radiation(J/hr m^2)",'Beam Radiation on a wall(J/hr m^2)','Total Radiation on a wall per day(J)'],
-            "Value": [p, gd,dr,brw,trw]
+            "Variable": ["Extra Terrestrial Solar Insolation(J/hr m^2)", "Clear Sky Radiation(J/hr m^2)","Diffused Radiation(J/hr m^2)",'Beam Radiation on a wall(J/hr m^2)','Total Radiation on a wall per day(J/m^2)','Total energy on wall(J)'],
+            "Value": [p, gd,dr,brw,trw,te]
         }
         table2_df = pd.DataFrame(table2_data)
         st.subheader("Table 1: Solar Data")
