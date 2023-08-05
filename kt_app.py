@@ -72,7 +72,7 @@ def main():
     model = tf.keras.models.load_model('forecast_KT_model1.h5')
     # Custom CSS for positioning the logo at the right top corner
     
-    kt = 0.00
+    
     # forecasting
    
     #for solar calculations
@@ -120,6 +120,7 @@ def main():
         gd = kt*p #Clear Sky Radiation
         
         dr = gd*sdf #Diffused Radiation
+        rhs = dr+gd
         avg_pk_hr = 4.814 ## for kgp avg Peak Sun Hours
         #for a wall
         brw = (gd/2) + ((gd/5)*m.cos(wall_azimuth_angle)) + (gd/10)*m.cos(m.radians(360*(julian_day - 172)/365))
@@ -133,8 +134,9 @@ def main():
         table1_df = pd.DataFrame(table1_data)
         # Create DataFrame for the second table
         table2_data = {
-            "Variable": ["Extra Terrestrial Solar Insolation(J/hr m^2)", "Clear Sky Radiation(J/hr m^2)","Diffused Radiation(J/hr m^2)",'Beam Radiation on a wall(J/hr m^2)','Total Radiation on a wall per day(J/m^2)','Total energy on wall(J)'],
-            "Value": [p, gd,dr,brw,trw,te]
+            "Variable": ["Extra Terrestrial Solar Insolation(J/hr m^2)", "Clear Sky Radiation(J/hr m^2)","Diffused Radiation(J/hr m^2)",'Radiation on horizontal surafce(
+            J/hr m^2)','Beam Radiation on a wall(J/hr m^2)','Total Radiation on a wall per day(J/m^2)','Total energy on wall(J)'],
+            "Value": [p, gd,dr,rhs,brw,trw,te]
         }
         table2_df = pd.DataFrame(table2_data)
         st.subheader("Table 1: Solar Data")
