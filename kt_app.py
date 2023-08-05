@@ -134,8 +134,7 @@ def main():
         table1_df = pd.DataFrame(table1_data)
         # Create DataFrame for the second table
         table2_data = {
-            "Variable": ["Extra Terrestrial Solar Insolation(J/hr m^2)", "Clear Sky Radiation(J/hr m^2)","Diffused Radiation(J/hr m^2)",'Radiation on horizontal surafce(
-            J/hr m^2)','Beam Radiation on a wall(J/hr m^2)','Total Radiation on a wall per day(J/m^2)','Total energy on wall(J)'],
+            "Variable": ["Extra Terrestrial Solar Insolation(J/hr m^2)", "Clear Sky Radiation(J/hr m^2)","Diffused Radiation(J/hr m^2)",'Radiation on horizontal surafce(J/hr m^2)','Beam Radiation on a wall(J/hr m^2)','Total Radiation on a wall per day(J/m^2)','Total energy on wall(J)'],
             "Value": [p, gd,dr,rhs,brw,trw,te]
         }
         table2_df = pd.DataFrame(table2_data)
