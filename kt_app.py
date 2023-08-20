@@ -126,12 +126,12 @@ def main():
         
         if latitude>=0:
             if julian_day>162 and julian_day<180:
-                brw = (gd/2) +  ((gd/5)*m.cos(wall_azimuth_angle)) +  ((gd/5)*m.cos(wall_azimuth_angle + 190))
+                brw = (gd/2) +  ((gd/5)*m.cos(wall_azimuth_angle)) +  ((gd/5)*m.cos(wall_azimuth_angle + m.degrees(190)))
             else:
                 brw = (gd/2) + ((gd/5)*m.cos(wall_azimuth_angle)) + (gd/10)*m.cos(m.radians(360*(julian_day - 172)/365))
                 
         elif latitude<0:
-            brw = (gd/2) + ((gd/5)*m.cos(wall_azimuth_angle + 180))
+            brw = (gd/2) + ((gd/5)*m.cos(wall_azimuth_angle + m.degrees(180)))
         
         trw = (brw*4.814 + dr*10)
         te = trw*wall_area
